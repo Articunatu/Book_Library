@@ -23,5 +23,7 @@ namespace Book_Library.Models
         [Required(ErrorMessage = "En lånetagre måste ha ett personnummer!")]
         public string SecurityNumber { get; set; }
         public ICollection<Loan> BurrowedBooks { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Book> Checklist { get; set; }
     }
 }

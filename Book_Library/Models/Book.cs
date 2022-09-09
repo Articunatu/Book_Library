@@ -14,15 +14,7 @@ namespace Book_Library.Models
         [StringLength(25, ErrorMessage = "En boktitel kan max bestå utav 25 bokstäver!")]
         [MinLength(1, ErrorMessage = "En boktitel måste bestå av minst 1 bokstav!")]
         public string Title { get; set; }
-        public Status BookStatus { get; set; }
-    }
-
-    public enum Status
-    {
-        Available,
-        Late,
-        Unavailable,
-        Burrowed,
-        Reserved
+        public ICollection<BookCopy> Copies { get; set; }
+        public Queue<Burrower> Reservation { get; set; }
     }
 }
