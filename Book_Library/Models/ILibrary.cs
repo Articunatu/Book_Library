@@ -8,9 +8,9 @@ namespace Book_Library.Models
     public interface IBurrower
     {
         Task<Burrower> Create(Burrower createdBurrower);
-        Task<Burrower> ReadSingle(int id); 
-        IEnumerable<Task<Burrower>> ReadAll();
-        Task<Burrower> ReadAllBurrowersLoans(int id);
+        Task<Burrower> ReadSingle(int id);
+        Task<IEnumerable<Burrower>> ReadAll();
+        Task<Object> ReadAllBurrowersLoans(int id);
         Task<Burrower> Update(Burrower updatedBurrower);
         Task<Burrower> Delete(Burrower deletedBurrower);
     }
