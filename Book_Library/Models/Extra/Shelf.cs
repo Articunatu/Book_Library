@@ -9,6 +9,6 @@ namespace Book_Library.Models
     {
         public int ShelfID { get; set; }
         public string ShelfName { get; set; }
-        public ICollection<BookCopy> BooksOfShelf { get; set; }
+        public ICollection<Copy> BooksOfShelf { get; set; }
     }
 }

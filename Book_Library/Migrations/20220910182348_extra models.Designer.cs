@@ -4,14 +4,16 @@ using Book_Library.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Book_Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220910182348_extra models")]
+    partial class extramodels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,6 +88,31 @@ namespace Book_Library.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("Book_Library.Models.BookCopy", b =>
+                {
+                    b.Property<int>("CopyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShelfID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CopyID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("ShelfID");
+
+                    b.ToTable("BookCopies");
+                });
+
             modelBuilder.Entity("Book_Library.Models.Burrower", b =>
                 {
                     b.Property<int>("BurrowerID")
@@ -116,31 +143,6 @@ namespace Book_Library.Migrations
                     b.HasKey("BurrowerID");
 
                     b.ToTable("Burrowers");
-                });
-
-            modelBuilder.Entity("Book_Library.Models.Copy", b =>
-                {
-                    b.Property<int>("CopyID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BookID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ShelfID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CopyID");
-
-                    b.HasIndex("BookID");
-
-                    b.HasIndex("ShelfID");
-
-                    b.ToTable("Copies");
                 });
 
             modelBuilder.Entity("Book_Library.Models.Library", b =>
@@ -177,10 +179,10 @@ namespace Book_Library.Migrations
                     b.Property<DateTime>("DateOfReturn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Loan_BurrowerID")
+                    b.Property<int>("Loan_BookCopyID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Loan_CopyID")
+                    b.Property<int>("Loan_BurrowerID")
                         .HasColumnType("int");
 
                     b.HasKey("LoanID");
@@ -255,7 +257,7 @@ namespace Book_Library.Migrations
                         .HasForeignKey("BurrowerID");
                 });
 
-            modelBuilder.Entity("Book_Library.Models.Copy", b =>
+            modelBuilder.Entity("Book_Library.Models.BookCopy", b =>
                 {
                     b.HasOne("Book_Library.Models.Book", null)
                         .WithMany("Copies")

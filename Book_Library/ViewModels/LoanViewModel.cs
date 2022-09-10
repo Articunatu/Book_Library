@@ -1,7 +1,7 @@
 ﻿using Book_Library.Models;
 using System.Collections.Generic;
 
-namespace Book_Library.Controllers
+namespace Book_Library.ViewModels
 {
     public class LoanViewModel
     {

@@ -4,6 +4,7 @@ namespace Book_Library.Models
 {
     public class Reservation
     {
+        public int ReservationID { get; set; }
         public int BurrowerID { get; set; }
         public int BookID { get; set; }
         public int LibraryID { get; set; }

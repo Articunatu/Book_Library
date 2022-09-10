@@ -38,9 +38,9 @@ namespace Book_Library.Models
 
         public async Task<Object> ReadAllBurrowersLoans(int burrowerID)
         {
-            var burrowersBooks = (from bo in _context.Books
+            var burrowersBooks = (from bo in _context.Copies
                                   join l in _context.Loans
-                                  on bo.BookID equals l.Loan_BookID
+                                  on bo.BookID equals l.Loan_CopyID
                                   join bu in _context.Burrowers
                                   on l.Loan_BurrowerID equals bu.BurrowerID
                                   where bu.BurrowerID == burrowerID
