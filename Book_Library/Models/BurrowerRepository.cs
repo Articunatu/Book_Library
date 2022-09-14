@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Book_Library.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,30 +23,32 @@ namespace Book_Library.Models
             return created.Entity;
         }
 
-        public async Task<Burrower> Delete(Burrower deletedBurrower)
-        {
-            var deleted = await _context.Burrowers.FirstOrDefaultAsync(b => b.BurrowerID == deletedBurrower.BurrowerID);
-            _context.Remove(deleted);
-            await _context.SaveChangesAsync();
-            return deleted;
-
-        }
-
         public async Task<IEnumerable<Burrower>> ReadAll()
         {
             return await _context.Burrowers.ToArrayAsync();
         }
 
-        public async Task<Object> ReadAllBurrowersLoans(int burrowerID)
+        public async Task<object> ReadAllBurrowersLoans(int burrowerID)
         {
             var burrowersBooks = (from bo in _context.Copies
                                   join l in _context.Loans
-                                  on bo.BookID equals l.Loan_CopyID
+                                  on bo.BookID equals l.CopyID
                                   join bu in _context.Burrowers
-                                  on l.Loan_BurrowerID equals bu.BurrowerID
+                                  on l.BurrowerID equals bu.BurrowerID
                                   where bu.BurrowerID == burrowerID
                                   select bo).Distinct().ToArrayAsync();
-            return await burrowersBooks;
+
+            LoanViewModel loanViewModel = new LoanViewModel();
+
+            foreach (var item in await burrowersBooks)
+            {
+                Book book = await _context.Books.FirstOrDefaultAsync(b => b.BookID == item.BookID);
+                Loan loan = await _context.Loans.FirstOrDefaultAsync(l => l.CopyID == item.CopyID);
+                loanViewModel.BurrowedBook.Add(book);
+                loanViewModel.Loan.Add(loan);
+            }
+
+            return loanViewModel;
         }
 
         public async Task<Burrower> ReadSingle(int burrowerID)
@@ -63,6 +66,14 @@ namespace Book_Library.Models
             updated.SecurityNumber = updatedBurrower.SecurityNumber;
             await _context.SaveChangesAsync();
             return updated;
+        }
+
+        public async Task<Burrower> Delete(Burrower deletedBurrower)
+        {
+            var deleted = await _context.Burrowers.FirstOrDefaultAsync(b => b.BurrowerID == deletedBurrower.BurrowerID);
+            _context.Remove(deleted);
+            await _context.SaveChangesAsync();
+            return deleted;
         }
     }
 }

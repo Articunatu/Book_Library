@@ -11,7 +11,7 @@ namespace Book_Library.Models
         [Key]
         public int CopyID { get; set; }
         public int BookID { get; set; }
-        public int ShelfID { get; set; }
+        public int? ShelfID { get; set; }
         public Status BookStatus { get; set; }
     }
 

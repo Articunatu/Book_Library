@@ -11,9 +11,9 @@ namespace Book_Library.Models
         [Key]
         public int LoanID { get; set; }
         [Required(ErrorMessage = "Ett lån måste bestå av ett bok-exemplar!")]
-        public int Loan_CopyID { get; set; }
+        public int CopyID { get; set; }
         [Required(ErrorMessage = "Ett lån måste ha en lånetagare!")]
-        public int Loan_BurrowerID { get; set; }
+        public int BurrowerID { get; set; }
         public DateTime DateOfLoan { get; set; }
         public DateTime DateOfReturn { get; set; }
         public int AmountOfLoanRenewals { get; set; }

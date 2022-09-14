@@ -15,15 +15,14 @@ namespace Book_Library.Models
         [MinLength(1, ErrorMessage = "Ett förnamn måste bestå utav minst 1 bokstav!")]
         public string FirstName { get; set; }
         [Required(ErrorMessage = "En lånetagare måste ha ett efternamn!")]
-        [StringLength(15, ErrorMessage = "Ett efternan kan bestå utav max 15 bokstäver!")]
+        [StringLength(15, ErrorMessage = "Ett efternamn kan bestå utav max 15 bokstäver!")]
         [MinLength(2, ErrorMessage = "Ett efternamn måste bestå utav minst 2 bokstäver!")]
         public string LastName { get; set; }
         public string EMail { get; set; }
         public string Address { get; set; }
-        [Required(ErrorMessage = "En lånetagre måste ha ett personnummer!")]
+        [Required(ErrorMessage = "En lånetagare måste ha ett personnummer!")]
         public string SecurityNumber { get; set; }
         public ICollection<Loan> BurrowedBooks { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
-        public ICollection<Book> Checklist { get; set; }
     }
 }

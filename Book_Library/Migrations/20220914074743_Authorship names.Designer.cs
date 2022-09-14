@@ -4,14 +4,16 @@ using Book_Library.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Book_Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class LibraryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220914074743_Authorship names")]
+    partial class Authorshipnames
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +53,7 @@ namespace Book_Library.Migrations
                     b.Property<int>("AuthorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookID")
+                    b.Property<int>("Authorship_BookID")
                         .HasColumnType("int");
 
                     b.HasKey("AuthorshipID");
@@ -123,7 +125,7 @@ namespace Book_Library.Migrations
                     b.Property<int>("BookStatus")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ShelfID")
+                    b.Property<int>("ShelfID")
                         .HasColumnType("int");
 
                     b.HasKey("CopyID");
@@ -160,10 +162,7 @@ namespace Book_Library.Migrations
                     b.Property<int>("AmountOfLoanRenewals")
                         .HasColumnType("int");
 
-                    b.Property<int>("BurrowerID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CopyID")
+                    b.Property<int?>("BurrowerID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfLoan")
@@ -171,6 +170,12 @@ namespace Book_Library.Migrations
 
                     b.Property<DateTime>("DateOfReturn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Loan_BurrowerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Loan_CopyID")
+                        .HasColumnType("int");
 
                     b.HasKey("LoanID");
 
@@ -249,16 +254,16 @@ namespace Book_Library.Migrations
 
                     b.HasOne("Book_Library.Models.Shelf", null)
                         .WithMany("BooksOfShelf")
-                        .HasForeignKey("ShelfID");
+                        .HasForeignKey("ShelfID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Book_Library.Models.Loan", b =>
                 {
                     b.HasOne("Book_Library.Models.Burrower", null)
                         .WithMany("BurrowedBooks")
-                        .HasForeignKey("BurrowerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BurrowerID");
                 });
 
             modelBuilder.Entity("Book_Library.Models.Reservation", b =>

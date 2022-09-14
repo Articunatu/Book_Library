@@ -10,7 +10,7 @@ namespace Book_Library.Models
     {
         [Key]
         public int AuthorshipID { get; set; }
-        public int Authorship_AuthorID { get; set; }
-        public int Authorship_BookID { get; set; }
+        public int AuthorID { get; set; }
+        public int BookID { get; set; }
     }
 }

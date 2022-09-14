@@ -17,17 +17,45 @@ namespace Book_Library.Controllers
             _burrower = burrower;
         }
 
-        public IActionResult Loans(int id)
+        public async Task<ActionResult<Burrower>> PostBurrower(Burrower burrower)
         {
-            IEnumerable<LoanViewModel> BurrowedBooks;
-            BurrowedBooks = (IEnumerable<LoanViewModel>)
-                _burrower.ReadAllBurrowersLoans(id);
+            var createdBurrower = await _burrower.Create(burrower);
+            return View(createdBurrower);
+        }
+
+        public async Task<ActionResult<Burrower>> AllBurrowers()
+        {
+            var burrowers = await _burrower.ReadAll();
+            return View(burrowers);
+        }
+
+        public async Task<ActionResult<Burrower>> ChosenBurrower(int id)
+        {
+            var burrower = await _burrower.ReadSingle(id);
+            return View(burrower);
+        }
+
+        public async Task<ActionResult<object>> Loans(int id)
+        {
+            var BurrowedBooks = await _burrower.ReadAllBurrowersLoans(id);
 
             if (BurrowedBooks == null)
             {
-                return NotFound();
+                return NotFound("That burrower has no burrowed books at the moment...");
             }
-            return View(BurrowedBooks);
+            return View((LoanViewModel)BurrowedBooks);
+        }
+
+        public async Task<ActionResult<Burrower>> EditBurrower(Burrower burrower)
+        {
+            var editedburrower = await _burrower.Update(burrower);
+            return View(editedburrower);
+        }
+
+        public async Task<ActionResult<Burrower>> DeleteBurrower(Burrower burrower)
+        {
+            var deletedBurrower = await _burrower.Delete(burrower);
+            return View(deletedBurrower);
         }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20220910182855_correct name convention")]
-    partial class correctnameconvention
+    [Migration("20220914075323_nullable shelf")]
+    partial class nullableshelf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,13 +50,10 @@ namespace Book_Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AuthorID")
+                    b.Property<int>("AuthorID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Authorship_AuthorID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Authorship_BookID")
+                    b.Property<int>("BookID")
                         .HasColumnType("int");
 
                     b.HasKey("AuthorshipID");
@@ -73,17 +70,12 @@ namespace Book_Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BurrowerID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
 
                     b.HasKey("BookID");
-
-                    b.HasIndex("BurrowerID");
 
                     b.ToTable("Books");
                 });
@@ -133,7 +125,7 @@ namespace Book_Library.Migrations
                     b.Property<int>("BookStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShelfID")
+                    b.Property<int?>("ShelfID")
                         .HasColumnType("int");
 
                     b.HasKey("CopyID");
@@ -247,14 +239,9 @@ namespace Book_Library.Migrations
                 {
                     b.HasOne("Book_Library.Models.Author", null)
                         .WithMany("AuthorsBooks")
-                        .HasForeignKey("AuthorID");
-                });
-
-            modelBuilder.Entity("Book_Library.Models.Book", b =>
-                {
-                    b.HasOne("Book_Library.Models.Burrower", null)
-                        .WithMany("Checklist")
-                        .HasForeignKey("BurrowerID");
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Book_Library.Models.Copy", b =>
@@ -267,9 +254,7 @@ namespace Book_Library.Migrations
 
                     b.HasOne("Book_Library.Models.Shelf", null)
                         .WithMany("BooksOfShelf")
-                        .HasForeignKey("ShelfID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ShelfID");
                 });
 
             modelBuilder.Entity("Book_Library.Models.Loan", b =>

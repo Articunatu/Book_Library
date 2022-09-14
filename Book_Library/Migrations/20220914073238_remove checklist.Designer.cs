@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Book_Library.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20220907093916_Initial")]
-    partial class Initial
+    [Migration("20220914073238_remove checklist")]
+    partial class removechecklist
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,9 +73,6 @@ namespace Book_Library.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookStatus")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(25)")
@@ -118,6 +115,46 @@ namespace Book_Library.Migrations
                     b.ToTable("Burrowers");
                 });
 
+            modelBuilder.Entity("Book_Library.Models.Copy", b =>
+                {
+                    b.Property<int>("CopyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShelfID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CopyID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("ShelfID");
+
+                    b.ToTable("Copies");
+                });
+
+            modelBuilder.Entity("Book_Library.Models.Library", b =>
+                {
+                    b.Property<int>("LibraryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LibraryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LibraryID");
+
+                    b.ToTable("Libraries");
+                });
+
             modelBuilder.Entity("Book_Library.Models.Loan", b =>
                 {
                     b.Property<int>("LoanID")
@@ -137,10 +174,10 @@ namespace Book_Library.Migrations
                     b.Property<DateTime>("DateOfReturn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Loan_BookID")
+                    b.Property<int>("Loan_BurrowerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Loan_BurrowerID")
+                    b.Property<int>("Loan_CopyID")
                         .HasColumnType("int");
 
                     b.HasKey("LoanID");
@@ -150,6 +187,57 @@ namespace Book_Library.Migrations
                     b.ToTable("Loans");
                 });
 
+            modelBuilder.Entity("Book_Library.Models.Reservation", b =>
+                {
+                    b.Property<int>("ReservationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BurrowerID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateReserved")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LibraryID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("BurrowerID");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("Book_Library.Models.Shelf", b =>
+                {
+                    b.Property<int>("ShelfID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("LibraryID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ShelfName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ShelfID");
+
+                    b.HasIndex("LibraryID");
+
+                    b.ToTable("Shelves");
+                });
+
             modelBuilder.Entity("Book_Library.Models.Authorship", b =>
                 {
                     b.HasOne("Book_Library.Models.Author", null)
@@ -157,11 +245,48 @@ namespace Book_Library.Migrations
                         .HasForeignKey("AuthorID");
                 });
 
+            modelBuilder.Entity("Book_Library.Models.Copy", b =>
+                {
+                    b.HasOne("Book_Library.Models.Book", null)
+                        .WithMany("Copies")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Book_Library.Models.Shelf", null)
+                        .WithMany("BooksOfShelf")
+                        .HasForeignKey("ShelfID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Book_Library.Models.Loan", b =>
                 {
                     b.HasOne("Book_Library.Models.Burrower", null)
                         .WithMany("BurrowedBooks")
                         .HasForeignKey("BurrowerID");
+                });
+
+            modelBuilder.Entity("Book_Library.Models.Reservation", b =>
+                {
+                    b.HasOne("Book_Library.Models.Book", null)
+                        .WithMany("Reservation")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Book_Library.Models.Burrower", null)
+                        .WithMany("Reservations")
+                        .HasForeignKey("BurrowerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Book_Library.Models.Shelf", b =>
+                {
+                    b.HasOne("Book_Library.Models.Library", null)
+                        .WithMany("Shelves")
+                        .HasForeignKey("LibraryID");
                 });
 #pragma warning restore 612, 618
         }
