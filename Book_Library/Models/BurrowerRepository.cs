@@ -28,22 +28,24 @@ namespace Book_Library.Models
             return await _context.Burrowers.ToArrayAsync();
         }
 
-        public async Task<object> ReadAllBurrowersLoans(int burrowerID)
+        public object ReadAllBurrowersLoans(int burrowerID)
         {
-            var burrowersBooks = (from bo in _context.Copies
+            var burrowersBooks = (from c in _context.Copies
                                   join l in _context.Loans
-                                  on bo.BookID equals l.CopyID
+                                  on c.CopyID equals l.CopyID
                                   join bu in _context.Burrowers
                                   on l.BurrowerID equals bu.BurrowerID
                                   where bu.BurrowerID == burrowerID
-                                  select bo).Distinct().ToArrayAsync();
+                                  select c).Distinct().ToArray();
 
             LoanViewModel loanViewModel = new LoanViewModel();
+            loanViewModel.BurrowedBook = new List<Book>();
+            loanViewModel.Loan = new List<Loan>();
 
-            foreach (var item in await burrowersBooks)
+            foreach (var item in burrowersBooks)
             {
-                Book book = await _context.Books.FirstOrDefaultAsync(b => b.BookID == item.BookID);
-                Loan loan = await _context.Loans.FirstOrDefaultAsync(l => l.CopyID == item.CopyID);
+                Book book = _context.Books.FirstOrDefault(b => b.BookID == item.BookID);
+                Loan loan = _context.Loans.FirstOrDefault(l => l.CopyID == item.CopyID);
                 loanViewModel.BurrowedBook.Add(book);
                 loanViewModel.Loan.Add(loan);
             }

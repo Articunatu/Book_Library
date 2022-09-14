@@ -11,7 +11,7 @@ namespace Book_Library.Models
         Task<Burrower> Create(Burrower createdBurrower);
         Task<Burrower> ReadSingle(int id);
         Task<IEnumerable<Burrower>> ReadAll();
-        Task<object> ReadAllBurrowersLoans(int id);
+        object ReadAllBurrowersLoans(int id);
         Task<Burrower> Update(Burrower updatedBurrower);
         Task<Burrower> Delete(Burrower deletedBurrower);
     }
