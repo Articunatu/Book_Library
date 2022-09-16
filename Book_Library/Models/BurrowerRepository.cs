@@ -28,7 +28,7 @@ namespace Book_Library.Models
             return await _context.Burrowers.ToArrayAsync();
         }
 
-        public object ReadAllBurrowersLoans(int burrowerID)
+        public LoanCard ReadAllBurrowersLoans(int burrowerID)
         {
             var burrowersBooks = (from c in _context.Copies
                                   join l in _context.Loans
@@ -38,19 +38,26 @@ namespace Book_Library.Models
                                   where bu.BurrowerID == burrowerID
                                   select c).Distinct().ToArray();
 
-            LoanViewModel loanViewModel = new LoanViewModel();
-            loanViewModel.BurrowedBook = new List<Book>();
-            loanViewModel.Loan = new List<Loan>();
+            LoanCard loanCard = new LoanCard();
+            loanCard.LoanCards = new List<LoanViewModel>();
 
             foreach (var item in burrowersBooks)
             {
+                LoanViewModel loanViewModel = new LoanViewModel();
+
                 Book book = _context.Books.FirstOrDefault(b => b.BookID == item.BookID);
                 Loan loan = _context.Loans.FirstOrDefault(l => l.CopyID == item.CopyID);
-                loanViewModel.BurrowedBook.Add(book);
-                loanViewModel.Loan.Add(loan);
+
+                loanViewModel.BurrowedBook = new Book();
+                loanViewModel.Loan = new Loan();
+
+                loanViewModel.BurrowedBook = book;
+                loanViewModel.Loan = loan;
+
+                loanCard.LoanCards.Add(loanViewModel);
             }
 
-            return loanViewModel;
+            return loanCard;
         }
 
         public async Task<Burrower> ReadSingle(int burrowerID)

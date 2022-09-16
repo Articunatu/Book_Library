@@ -35,15 +35,15 @@ namespace Book_Library.Controllers
             return View(burrower);
         }
 
-        public ActionResult<object> Loans(int id)
+        public ActionResult<LoanCard> Loans(int id)
         {
-            LoanViewModel BurrowedBooks = (LoanViewModel)_burrower.ReadAllBurrowersLoans(id);
+            LoanCard BurrowedBooks = _burrower.ReadAllBurrowersLoans(id);
 
-            if (BurrowedBooks == null || BurrowedBooks.BurrowedBook.Count == 0)
+            if (BurrowedBooks == null)
             {
                 return NotFound("That burrower has no burrowed books at the moment...");
             }
-            return View((LoanViewModel)BurrowedBooks);
+            return View(BurrowedBooks);
         }
 
         public async Task<ActionResult<Burrower>> EditBurrower(Burrower burrower)

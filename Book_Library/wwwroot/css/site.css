@@ -69,3 +69,11 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.book-title {
+    text-align: left;
+}
+
+.return-date {
+    text-align: right;
+}

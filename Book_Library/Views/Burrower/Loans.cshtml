@@ -1,14 +1,17 @@
-﻿@model LoanViewModel
+﻿@model LoanCard
 
 <div class="loan">
+    <h2>@</h2>
     <div class="col-sm-4 col-lg-4 col-md-4">
-        @foreach (var item in Model.BurrowedBook)
+        @foreach (LoanViewModel loanvm in Model.LoanCards)
         {
-            <h3>@item.Title</h3>
-        }
-        @foreach (var item in Model.Loan)
-        {
-            <h3>@item.DateOfReturn</h3>
+            <div class="book-title">
+                <h3>@loanvm.BurrowedBook.Title</h3>
+            </div>
+
+            <div class="return-date">
+                <h3>@loanvm.Loan.DateOfReturn</h3>
+            </div>
         }
     </div>
 </div>
