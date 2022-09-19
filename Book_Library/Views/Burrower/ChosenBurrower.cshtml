@@ -1,0 +1,21 @@
+﻿@model Burrower
+
+<div class="selected-burrower">
+    <div class="">
+        <h5>@Model.FirstName @Model.LastName</h5>
+    </div>
+    <div class="user-info">
+        <div class="">
+            <span class="variable">E-Post: </span>
+            <span>@Model.EMail</span>
+        </div>
+        <div class="">
+            <span>Personnummer: </span>
+            <span>@Model.SecurityNumber</span>
+        </div>
+        <div class="">
+            <span>Adress: </span>
+            <span>@Model.Address</span>
+        </div>
+    </div>
+</div>

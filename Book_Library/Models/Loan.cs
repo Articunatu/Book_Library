@@ -14,7 +14,9 @@ namespace Book_Library.Models
         public int CopyID { get; set; }
         [Required(ErrorMessage = "Ett lån måste ha en lånetagare!")]
         public int BurrowerID { get; set; }
+        [DisplayFormat(DataFormatString = "{yyyy-mm-dd}")]
         public DateTime DateOfLoan { get; set; }
+        [DisplayFormat(DataFormatString = "{yyyy-mm-dd}")]
         public DateTime DateOfReturn { get; set; }
         public int AmountOfLoanRenewals { get; set; }
     }

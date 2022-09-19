@@ -75,5 +75,14 @@ body {
 }
 
 .return-date {
-    text-align: right;
+/*    text-align: right;
+*/}
+
+.user-info{
+    justify-content: space-between;
+    width: 100%;
+}
+
+h3 {
+    text-align: center;
 }
