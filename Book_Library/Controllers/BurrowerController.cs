@@ -17,16 +17,21 @@ namespace Book_Library.Controllers
             _burrower = burrower;
         }
 
-        public async Task<ActionResult<Burrower>> PostBurrower(Burrower burrower)
+        public ActionResult<Burrower> PostBurrower()
         {
-            var createdBurrower = await _burrower.Create(burrower);
-            return View(createdBurrower);
+            return View();
+        }
+
+        public async Task<ActionResult<Burrower>> CreateBurrower([FromBody] Burrower burrower)
+        {
+
         }
 
         public async Task<ActionResult<Burrower>> AllBurrowers()
         {
-            var burrowers = await _burrower.ReadAll();
-            return View(burrowers);
+            BurrowerViewModel burrowerViewModel = new BurrowerViewModel();
+            burrowerViewModel.Burrowers = await _burrower.ReadAll();
+            return View(burrowerViewModel);
         }
 
         public async Task<ActionResult<Burrower>> ChosenBurrower(int id)
@@ -52,9 +57,10 @@ namespace Book_Library.Controllers
             return View(editedburrower);
         }
 
-        public async Task<ActionResult<Burrower>> DeleteBurrower(Burrower burrower)
+        public async Task<ActionResult<Burrower>> DeleteBurrower(int burrowerID)
         {
-            var deletedBurrower = await _burrower.Delete(burrower);
+            var deletedBurrower = await _burrower.ReadSingle(burrowerID);
+            await _burrower.Delete(deletedBurrower);
             return View(deletedBurrower);
         }
     }

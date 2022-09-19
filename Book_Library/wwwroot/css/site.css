@@ -74,6 +74,10 @@ body {
     text-align: left;
 }
 
+.loan {
+    justify-content: space-between;
+}
+
 .return-date {
 /*    text-align: right;
 */}

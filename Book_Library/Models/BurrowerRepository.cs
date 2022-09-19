@@ -80,7 +80,7 @@ namespace Book_Library.Models
         public async Task<Burrower> Delete(Burrower deletedBurrower)
         {
             var deleted = await _context.Burrowers.FirstOrDefaultAsync(b => b.BurrowerID == deletedBurrower.BurrowerID);
-            _context.Remove(deleted);
+            _context.Burrowers.Remove(deleted);
             await _context.SaveChangesAsync();
             return deleted;
         }

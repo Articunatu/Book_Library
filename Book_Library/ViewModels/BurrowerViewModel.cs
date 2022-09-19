@@ -8,6 +8,6 @@ namespace Book_Library.ViewModels
 {
     public class BurrowerViewModel
     {
-        public ICollection<Burrower> Burrowers { get; set; }
+        public IEnumerable<Burrower> Burrowers { get; set; }
     }
 }

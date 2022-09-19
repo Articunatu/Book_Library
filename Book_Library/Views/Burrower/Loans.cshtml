@@ -1,25 +1,27 @@
 ﻿@model LoanCard
 
 <div class="loan">
-    <h1>Dina lån</h1>
+    <h1></h1>
     <div class="col-sm-4 col-lg-4 col-md-4">
-        @foreach (LoanViewModel loanVM in Model.LoanCards)
-        {
-            <div class="book-title">
-                <h5>@loanVM.BurrowedBook.Title</h5>
-            </div>
+        <div class="loan">
+            @foreach (LoanViewModel loanVM in Model.LoanCards)
+            {
+                <div class="book-title">
+                    <h5>@loanVM.BurrowedBook.Title</h5>
+                </div>
 
-            <div class="return-date">
-                <a>Återlämningsdatum: @loanVM.Loan.DateOfReturn.ToString("yyyy-MM-dd")</a>
-            </div>
+                <div class="return-date">
+                    <a>Återlämningsdatum: @loanVM.Loan.DateOfReturn.ToString("yyyy-MM-dd")</a>
+                </div>
 
-            <div class="borrow-date">
-                <a>Datum Lånad: @loanVM.Loan.DateOfLoan.ToString("yyyy-MM-dd")</a>
-            </div>
+                <div class="borrow-date">
+                    <a>Datum Lånad: @loanVM.Loan.DateOfLoan.ToString("yyyy-MM-dd")</a>
+                </div>
 
-            <div class="renewals">
-                <a>Återstående omlån: @loanVM.Loan.AmountOfLoanRenewals</a>
-            </div>
-        }
+                <div class="renewals">
+                    <a>Återstående omlån: @loanVM.Loan.AmountOfLoanRenewals</a>
+                </div>
+            }
+        </div>
     </div>
 </div>
