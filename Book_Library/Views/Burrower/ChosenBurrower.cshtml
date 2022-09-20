@@ -18,4 +18,9 @@
             <span>@Model.Address</span>
         </div>
     </div>
+    <div class="burrowers-loan">
+        <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
+        Lån
+        </a>
+    </div>
 </div>

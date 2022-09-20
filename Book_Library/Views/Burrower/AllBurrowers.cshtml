@@ -20,7 +20,13 @@
             <span>@item.Address</span>
         </div>
     </div>
+    <div class="read-single">
+        <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>Detaljer</a>
+    </div>
     <div class="delete">
         <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>Radera</a>
+    </div>
+    <div class="update">
+        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>Ändra</a>
     </div>
 }
