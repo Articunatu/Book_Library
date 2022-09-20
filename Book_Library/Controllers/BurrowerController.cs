@@ -55,15 +55,21 @@ namespace Book_Library.Controllers
             return View(BurrowedBooks);
         }
 
-        public async Task<ActionResult<Burrower>> EditBurrower(Burrower burrower)
+        public async Task<ActionResult<Burrower>> EditBurrower(int id)
         {
-            var editedburrower = await _burrower.Update(burrower);
-            return View(editedburrower);
+            Burrower edited = await _burrower.ReadSingle(id);
+            return View(edited);
+        }
+
+        public async Task<ActionResult<Burrower>> SavedEdit(Burrower burrower)
+        {
+            Burrower editedBurrower = await _burrower.Update(burrower);
+            return View(editedBurrower);
         }
 
         public async Task<ActionResult<Burrower>> DeleteBurrower(int burrowerID)
         {
-            var deletedBurrower = await _burrower.ReadSingle(burrowerID);
+            Burrower deletedBurrower = await _burrower.ReadSingle(burrowerID);
             await _burrower.Delete(deletedBurrower);
             return View(deletedBurrower);
         }
