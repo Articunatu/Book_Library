@@ -17,14 +17,18 @@ namespace Book_Library.Controllers
             _burrower = burrower;
         }
 
-        public ActionResult<Burrower> PostBurrower()
+        public ActionResult<Burrower> CreateBurrower()
         {
             return View();
         }
 
-        public async Task<ActionResult<Burrower>> CreateBurrower([FromBody] Burrower burrower)
-        {
+        //[Route("Default/Insert")]
 
+        [HttpPost]
+        public async Task<ActionResult<Burrower>> CreateBurrower(Burrower burrower)
+        {
+            await _burrower.Create(burrower);
+            return View();
         }
 
         public async Task<ActionResult<Burrower>> AllBurrowers()

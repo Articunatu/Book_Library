@@ -1,0 +1,89 @@
+﻿@model Burrower
+
+<h4>Skapa och lägg till en ny lånetagare</h4>
+
+<div>
+    @using (Html.BeginForm("CreateBurrower", "Burrower", FormMethod.Post))
+    {
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th colspan="2" align="center">Lånetagare</th>
+        </tr>
+        <tr>
+            <td>Förnamn:</td>
+            <td>@Html.TextBoxFor(b => b.FirstName)</td>
+        </tr>
+        <tr>
+            <td>Efternamn:</td>
+            <td>@Html.TextBoxFor(b => b.LastName)</td>
+        </tr>
+        <tr>
+            <td>Adress:</td>
+            <td>@Html.TextBoxFor(b => b.Address)</td>
+        </tr>
+        <tr>
+            <td>Personnummer:</td>
+            <td>@Html.TextBoxFor(b => b.SecurityNumber)</td>
+        </tr>
+        <tr>
+            <td>E-Post:</td>
+            <td>@Html.TextBoxFor(b => b.EMail)</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+    }
+</div>
+
+@*<br @using (Html.BeginForm("CreateBurrower", "Burrower", FormMethod.Post, new { enctype = "multipart/form-data" })) {
+    <table cellpadding="8">
+
+        <tr>
+            <td>Förnamn: </td>
+            <td><input type="text" name="input_first_name" id="11" /></td>
+        </tr>
+
+        <tr>
+            <td>Efternamn: </td>
+            <td><input type="text" name="input_lasst_name" id="12" /></td>
+        </tr>
+
+        <tr>
+            <td>Adress: </td>
+            <td><input type="text" name="input_address" id="13" /></td>
+        </tr>
+
+        <tr>
+            <td>Personnummer: </td>
+            <td><input type="text" name="input_security_number" id="14" /></td>
+        </tr>
+
+        <tr>
+            <td>E-Post: </td>
+            <td><input type="text" name="input_email" id="15" /></td>
+        </tr>
+    </table>
+    }
+    <a class="nav-link text-dark" asp-area="" asp-controller="Burrower" asp-action="SaveAndAddBurrower" asp-route-id="@Model">SPARA</a>*@
+
+@*<form asp-action="PostBurrower" method="post">
+
+        <label asp-for="FirstName">Förnamn:</label>
+        <input type="text" min="1" max="20" />
+
+        <label asp-for="LastName">Efternamn:</label>
+        <input type="text" min="1" max="20" />
+
+        <label asp-for="Address">Adress:</label>
+        <input type="text" min="1" max="30" />
+
+        <label asp-for="SecurityNumber">Personnummer:</label>
+        <input type="text" min="11" max="15" />
+
+        <label asp-for="EMail">E-Post:</label>
+        <input type="text" />
+
+        <button type="submit">SPARA</button>
+    </form>*@
