@@ -20,7 +20,13 @@
     </div>
     <div class="burrowers-loan">
         <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
-        Lån
+            Lån
         </a>
+    </div>
+    <div class="delete">
+        <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>Radera</a>
+    </div>
+    <div class="update">
+        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>Ändra</a>
     </div>
 </div>

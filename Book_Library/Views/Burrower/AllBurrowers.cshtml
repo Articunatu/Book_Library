@@ -7,18 +7,18 @@
         <h5>@item.FirstName @item.LastName</h5>
     </div>
     <div class="user-info">
-        <div class="">
+        @*<div class="">
             <span class="variable">E-Post: </span>
             <span>@item.EMail</span>
-        </div>
+        </div>*@
         <div class="">
             <span>Personnummer: </span>
             <span>@item.SecurityNumber</span>
         </div>
-        <div class="">
+        @*<div class="">
             <span>Adress: </span>
             <span>@item.Address</span>
-        </div>
+        </div>*@
     </div>
     <div class="read-single">
         <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>Detaljer</a>
