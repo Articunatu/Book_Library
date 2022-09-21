@@ -11,7 +11,7 @@ namespace Book_Library.Models
         Task<Book> Create(Book createdBook);
         Task<Book> ReadSingle(int id);
         Task<IEnumerable<Book>> ReadAll();
-        BookViewModel BooksAuthorsAsync(int id);
+        BookViewModel BooksAuthors(int id);
         Task<Book> Update(Book updatedBook);
         Task<Book> Delete(Book deletedBook);
     }

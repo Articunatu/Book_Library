@@ -16,16 +16,19 @@ namespace Book_Library.Models
             _book = book;
         }
 
-        public async Task<ActionResult<Burrower>> AllBooks()
+        public async Task<ActionResult<Book>> AllBooks()
         {
+            IEnumerable<Book> booksInLibrary = await _book.ReadAll();
 
             LibraryViewModel library = new LibraryViewModel();
+            library.BookViewModels = new List<BookViewModel>();
 
-            var booksAuthors = _book.BooksAuthorsAsync();
-
-            foreach (var item in booksAuthors)
+            foreach (var book in booksInLibrary)
             {
-                item.
+                _ = new BookViewModel();
+                BookViewModel bookViewModel = _book.BooksAuthors(book.BookID);
+
+                library.BookViewModels.Add(bookViewModel);
             }
             
             return View(library);

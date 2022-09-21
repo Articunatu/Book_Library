@@ -25,7 +25,7 @@ namespace Book_Library.Models
             return await _context.Books.ToArrayAsync();
         }
 
-        public async Task<BookViewModel> BooksAuthorsAsync(int id)
+        public BookViewModel BooksAuthors(int id)
         {
             var booksAuthors = (from ship in _context.Authorships
                                 join au in _context.Authors on
@@ -44,13 +44,6 @@ namespace Book_Library.Models
             {
                 Author author = _context.Authors.FirstOrDefault(a => a.AuthorID == item.AuthorID);
                 bookViewModel.Authors.Add(author);
-            }
-
-            IEnumerable<Book> booksInLibrary = await ReadAll();
-
-            foreach (var book in booksInLibrary)
-            {
-                bookViewModel.Book = book;
             }
 
             return bookViewModel;
