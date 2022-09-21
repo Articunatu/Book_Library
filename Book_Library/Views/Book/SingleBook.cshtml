@@ -1,0 +1,41 @@
+﻿@model BookViewModel
+
+<div class="container">
+    <div>
+        <h5>@Model.Book.Title</h5>
+    </div>
+    <div>
+        @foreach (var item in Model.Authors)
+        {
+            <p>@item.FirstName + " " + @item.LastName</p>
+        }
+    </div>
+    <div>
+        <p>Alla exemplar:</p>
+    </div>
+    <div>
+        @foreach (var item in Model.Book.Copies)
+        {
+            @switch (item.BookStatus)
+            {
+                case Status.Available:
+                    <p>TILLGÄNGLIG</p>
+                    break;
+                case Status.Late:
+                    <p>FÖRSENAD</p>
+                    break;
+                case Status.Gone:
+                    <p>BORTA</p>
+                    break;
+                case Status.Burrowed:
+                    <p>UTLÅNAD</p>
+                    break;
+                case Status.Reserved:
+                    <p>RESERVERAD</p>
+                    break;
+                default:
+                    break;
+            }
+        }
+    </div>
+</div>

@@ -5,15 +5,19 @@
 @foreach (var bookVM in Model.BookViewModels)
 {
     <div>
-        <div>
-            <h5>@bookVM.Book.Title</h5>
+        <div class="book-title">
+            <a asp-area="" asp-controller="Book" asp-action="SingleBook" asp-route-id=@bookVM.Book.BookID>
+                @bookVM.Book.Title
+            </a>
         </div>
-        <div>
+        <div class="author">
+            @if (bookVM.Authors.Count == 0)
+            {
+                <p>Error</p>
+            }
             @foreach (var author in bookVM.Authors)
             {
-                <div>
-                    <p>@author.FirstName + " " + @author.LastName</p>
-                </div>
+                <p>@author.FirstName + " " + @author.LastName</p>
             }
         </div>
     </div>

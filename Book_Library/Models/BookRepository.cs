@@ -25,20 +25,20 @@ namespace Book_Library.Models
             return await _context.Books.ToArrayAsync();
         }
 
-        public BookViewModel BooksAuthors(int id)
+        public BookViewModel BooksAuthors(int bookID)
         {
             var booksAuthors = (from ship in _context.Authorships
                                 join au in _context.Authors on
                                 ship.AuthorID equals au.AuthorID
                                 join bo in _context.Books on
                                 ship.BookID equals bo.BookID
-                                where bo.BookID == id
+                                where bo.BookID == bookID
                                 select ship).Distinct().ToArray();
 
             BookViewModel bookViewModel = new BookViewModel();
             bookViewModel.Authors = new List<Author>();
 
-            bookViewModel.Book = _context.Books.FirstOrDefault(b => b.BookID == id);
+            bookViewModel.Book = _context.Books.FirstOrDefault(b => b.BookID == bookID);
 
             foreach (var item in booksAuthors)
             {
@@ -46,12 +46,20 @@ namespace Book_Library.Models
                 bookViewModel.Authors.Add(author);
             }
 
+            bookViewModel.Copies = new List<Copy>();
+            var bookCopies = _context.Copies.Where(b => b.BookID == bookID);
+
+            foreach (var item in bookCopies)
+            {
+                bookViewModel.Copies.ToList().Add(item);
+            }
+
             return bookViewModel;
         }
 
-        public Task<Book> ReadSingle(int id)
+        public async Task<Book> ReadSingle(int bookID)
         {
-            throw new NotImplementedException();
+            return await _context.Books.FirstOrDefaultAsync(b => b.BookID.Equals(bookID));
         }
 
         public Task<Book> Update(Book updatedBook)

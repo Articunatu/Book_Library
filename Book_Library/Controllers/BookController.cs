@@ -25,13 +25,20 @@ namespace Book_Library.Models
 
             foreach (var book in booksInLibrary)
             {
-                _ = new BookViewModel();
-                BookViewModel bookViewModel = _book.BooksAuthors(book.BookID);
+                BookViewModel bookViewModel = new BookViewModel();
+                //bookViewModel.Authors = new List<Author>();
+                bookViewModel = _book.BooksAuthors(book.BookID);
 
                 library.BookViewModels.Add(bookViewModel);
             }
             
             return View(library);
+        }
+
+        public ActionResult<Book> SingleBook(int id)
+        {
+            BookViewModel bookViewModel = _book.BooksAuthors(id);
+            return View(bookViewModel);
         }
     }
 }
