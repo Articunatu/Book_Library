@@ -45,14 +45,11 @@ namespace Book_Library.Models
             {
                 LoanViewModel loanViewModel = new LoanViewModel();
 
-                Book book = _context.Books.FirstOrDefault(b => b.BookID == item.BookID);
-                Loan loan = _context.Loans.FirstOrDefault(l => l.CopyID == item.CopyID);
-
                 loanViewModel.BurrowedBook = new Book();
                 loanViewModel.Loan = new Loan();
 
-                loanViewModel.BurrowedBook = book;
-                loanViewModel.Loan = loan;
+                loanViewModel.BurrowedBook = _context.Books.FirstOrDefault(b => b.BookID == item.BookID);
+                loanViewModel.Loan = _context.Loans.FirstOrDefault(l => l.CopyID == item.CopyID);
 
                 loanCard.LoanCards.Add(loanViewModel);
             }

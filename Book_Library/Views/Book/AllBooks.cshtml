@@ -1,0 +1,20 @@
+﻿@model LibraryViewModel
+
+<h2>Alla böcker</h2>
+
+@foreach (var bookVM in Model.BookViewModels)
+{
+    <div>
+        <div>
+            <h5>@bookVM.Book.Title</h5>
+        </div>
+        <div>
+            @foreach (var author in bookVM.Authors)
+            {
+                <div>
+                    <p>@author.FirstName + " " + @author.LastName</p>
+                </div>
+            }
+        </div>
+    </div>
+}

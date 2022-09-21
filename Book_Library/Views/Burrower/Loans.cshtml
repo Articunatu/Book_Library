@@ -4,22 +4,31 @@
     <h1></h1>
     <div class="col-sm-4 col-lg-4 col-md-4">
         <div class="loan">
-            @foreach (LoanViewModel loanVM in Model.LoanCards)
+            @if (Model.LoanCards.Count > 0)
             {
-                <div class="book-title">
-                    <h5>@loanVM.BurrowedBook.Title</h5>
-                </div>
+                @foreach (LoanViewModel loanVM in Model.LoanCards)
+                {
+                    <div class="book-title">
+                        <h5>@loanVM.BurrowedBook.Title</h5>
+                    </div>
 
-                <div class="return-date">
-                    <a>Återlämningsdatum: @loanVM.Loan.DateOfReturn.ToString("yyyy-MM-dd")</a>
-                </div>
+                    <div class="return-date">
+                        <a>Återlämningsdatum: @loanVM.Loan.DateOfReturn.ToString("yyyy-MM-dd")</a>
+                    </div>
 
-                <div class="borrow-date">
-                    <a>Datum Lånad: @loanVM.Loan.DateOfLoan.ToString("yyyy-MM-dd")</a>
-                </div>
+                    <div class="borrow-date">
+                        <a>Datum Lånad: @loanVM.Loan.DateOfLoan.ToString("yyyy-MM-dd")</a>
+                    </div>
 
-                <div class="renewals">
-                    <a>Återstående omlån: @loanVM.Loan.AmountOfLoanRenewals</a>
+                    <div class="renewals">
+                        <a>Återstående omlån: @loanVM.Loan.AmountOfLoanRenewals</a>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="empty">
+                    <p>Inga lånade böcker...</p>
                 </div>
             }
         </div>
