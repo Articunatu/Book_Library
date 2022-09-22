@@ -58,13 +58,32 @@ namespace Book_Library.Controllers
         public async Task<ActionResult<Burrower>> EditBurrower(int id)
         {
             Burrower edited = await _burrower.ReadSingle(id);
-            return View(edited);
+            if (edited != null)
+            {
+                return View(edited);
+            }
+            return NotFound("Kunde ej hitta angiven lånetagare...");
         }
 
-        public async Task<ActionResult<Burrower>> SavedEdit(Burrower burrower)
+        public async Task<ActionResult<Burrower>> SavedEdit(int id, Burrower burrower)
         {
-            Burrower editedBurrower = await _burrower.Update(burrower);
-            return View(editedBurrower);
+            if (id == 0)
+            {
+                return NotFound("Ingen lånetagare existerar med ett ID på värdet 0...");
+            }
+            if (burrower == null)
+            {
+                return NotFound("Ingen objekt skickades...");
+            }
+
+            Burrower editedBurrower = await _burrower.Update(burrower, id);
+
+            if (editedBurrower != null)
+            {
+                return View(editedBurrower);
+            }
+
+            return NotFound("Kunde ej ändra den angivna lånetagaren...");
         }
 
         public async Task<ActionResult<Burrower>> DeleteBurrower(int id)

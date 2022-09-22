@@ -62,16 +62,24 @@ namespace Book_Library.Models
             return await _context.Burrowers.FirstOrDefaultAsync(b => b.BurrowerID.Equals(burrowerID));
         }
 
-        public async Task<Burrower> Update(Burrower updatedBurrower)
+        public async Task<Burrower> Update(Burrower updatedBurrower, int id)
         {
-            var updated = await _context.Burrowers.SingleOrDefaultAsync(b => b.BurrowerID.Equals(updatedBurrower.BurrowerID));
-            updated.FirstName = updatedBurrower.FirstName;
-            updated.LastName = updatedBurrower.LastName;
-            updated.EMail = updatedBurrower.EMail;
-            updated.Address = updatedBurrower.Address;
-            updated.SecurityNumber = updatedBurrower.SecurityNumber;
+            if (id != 0)
+            {
+                var updated = await ReadSingle(id);
+
+                updated.FirstName = updatedBurrower.FirstName;
+                updated.LastName = updatedBurrower.LastName;
+                updated.EMail = updatedBurrower.EMail;
+                updated.SecurityNumber = updatedBurrower.SecurityNumber;
+                updated.Address = updatedBurrower.Address;
+
+                await _context.SaveChangesAsync();
+                return updated;
+            }
+
             await _context.SaveChangesAsync();
-            return updated;
+            return null;
         }
 
         public async Task<Burrower> Delete(Burrower deletedBurrower)

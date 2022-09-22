@@ -12,7 +12,7 @@ namespace Book_Library.Models
         Task<Burrower> ReadSingle(int id);
         Task<IEnumerable<Burrower>> ReadAll();
         LoanCard ReadAllBurrowersLoans(int id);
-        Task<Burrower> Update(Burrower updatedBurrower);
+        Task<Burrower> Update(Burrower updatedBurrower, int id);
         Task<Burrower> Delete(Burrower deletedBurrower);
     }
 }
