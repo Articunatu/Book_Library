@@ -64,7 +64,7 @@ namespace Book_Library.Models
 
         public async Task<Burrower> Update(Burrower updatedBurrower)
         {
-            var updated = await _context.Burrowers.FirstOrDefaultAsync(b => b.BurrowerID.Equals(updatedBurrower.BurrowerID));
+            var updated = await _context.Burrowers.SingleOrDefaultAsync(b => b.BurrowerID.Equals(updatedBurrower.BurrowerID));
             updated.FirstName = updatedBurrower.FirstName;
             updated.LastName = updatedBurrower.LastName;
             updated.EMail = updatedBurrower.EMail;

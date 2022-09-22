@@ -67,11 +67,16 @@ namespace Book_Library.Controllers
             return View(editedBurrower);
         }
 
-        public async Task<ActionResult<Burrower>> DeleteBurrower(int burrowerID)
+        public async Task<ActionResult<Burrower>> DeleteBurrower(int id)
         {
-            Burrower deletedBurrower = await _burrower.ReadSingle(burrowerID);
-            await _burrower.Delete(deletedBurrower);
-            return View(deletedBurrower);
+            var deletedBurrower = await _burrower.ReadSingle(id);
+
+            if (deletedBurrower != null)
+            {
+                await _burrower.Delete(deletedBurrower);
+                return View(deletedBurrower);
+            }
+            return NotFound("Kunde ej hitta angiven lånetagare...");
         }
     }
 }
