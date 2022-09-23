@@ -31,6 +31,7 @@ namespace Book_Library
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IBurrower, BurrowerRepository>();
             services.AddScoped<IBook, BookRepository>();
+            services.AddScoped<ILoan, LoanRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

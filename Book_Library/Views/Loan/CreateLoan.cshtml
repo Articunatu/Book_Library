@@ -1,0 +1,33 @@
+﻿@model LoanViewModel
+
+<h4>Skapa och lägg till en ny lånetagare</h4>
+
+<div>
+    @using (Html.BeginForm("CreateLoan", "Loan", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Bekräfta ett nytt lån:</th>
+            </tr>
+            <tr>
+                <td>Lånetagare:</td> 
+                @{ 
+                    ViewBag.Title = "Lista";
+                    List<SelectListItem> list = new List<SelectListItem>();
+                    foreach (var item in Model.AllBurrowers)
+                    {
+                        list.Add(new SelectListItem() { Text = item.LastName + " " + item.FirstName });
+                    }
+                }
+                <td>@Html.DropDownList("Lånetagare", list, "välj en lånetagare")
+
+                   </td>
+            </tr>
+            
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    }
+</div>
