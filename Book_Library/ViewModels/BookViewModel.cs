@@ -11,5 +11,6 @@ namespace Book_Library.ViewModels
         public Book Book { get; set; }
         public IEnumerable<Copy> Copies { get; set; }
         public ICollection<Author> Authors { get; set; }
+        public ICollection<Shelf> Shelves{ get; set; }
     }
 }

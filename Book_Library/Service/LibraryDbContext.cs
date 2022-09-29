@@ -16,7 +16,7 @@ namespace Book_Library.Models
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Burrower> Burrowers { get; set; }
         public DbSet<Authorship> Authorships { get; set; }
-        public DbSet<Library> Libraries { get; set; }
+        public DbSet<Location> Libraries { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Shelf> Shelves { get; set; }
 

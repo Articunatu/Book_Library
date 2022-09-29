@@ -1,4 +1,5 @@
-﻿using Book_Library.ViewModels;
+﻿using Book_Library.Service;
+using Book_Library.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class BurrowerRepository : IBurrower
+    public class BurrowerRepository : ILibrary<Burrower>, IBurrower
     {
         private LibraryDbContext _context;
 

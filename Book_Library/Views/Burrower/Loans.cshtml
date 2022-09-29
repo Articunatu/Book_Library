@@ -23,6 +23,11 @@
                     <div class="renewals">
                         <a>Återstående omlån: @loanVM.Loan.AmountOfLoanRenewals</a>
                     </div>
+                    @if (DateTime.Compare(loanVM.Loan.DateOfReturn, DateTime.Now) < 0)
+                    {
+                        loanVM.BurrowedBook.Copies.FirstOrDefault(c => c.BookID == loanVM.BurrowedBook.BookID).BookStatus = Status.Late;
+                        <p>FÖRSENAD</p>
+                    }
                 }
             }
             else

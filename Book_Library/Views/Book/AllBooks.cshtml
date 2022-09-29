@@ -13,11 +13,11 @@
         <div class="author">
             @if (bookVM.Authors.Count == 0)
             {
-                <p>Error</p>
+                <p>FÖRFATTARE SAKNAS</p>
             }
             @foreach (var author in bookVM.Authors)
             {
-                <p>@author.FirstName @author.LastName</p>
+                <p>@author.LastName, @author.FirstName </p>
             }
         </div>
     </div>

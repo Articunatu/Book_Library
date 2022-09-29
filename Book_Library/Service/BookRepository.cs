@@ -1,4 +1,5 @@
-﻿using Book_Library.ViewModels;
+﻿using Book_Library.Service;
+using Book_Library.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class BookRepository : IBook
+    public class BookRepository : ILibrary<Book>, IBook
     {
         readonly LibraryDbContext _context;
 
@@ -15,9 +16,11 @@ namespace Book_Library.Models
         {
             _context = context;
         }
-        public Task<Book> Create(Book createdBook)
+        public async Task<Book> Create(Book createdBook)
         {
-            throw new NotImplementedException();
+            var created = await _context.Books.AddAsync(createdBook);
+            await _context.SaveChangesAsync();
+            return created.Entity;
         }
 
         public async Task<IEnumerable<Book>> ReadAll()
@@ -51,6 +54,11 @@ namespace Book_Library.Models
 
             foreach (var item in bookCopies)
             {
+                //var loanedCopy = _context.Loans.FirstOrDefault(l => l.CopyID == item.CopyID);
+                //if (loanedCopy != null && DateTime.Compare(loanedCopy.DateOfReturn, DateTime.Now) < 0)
+                //{
+                //    item.BookStatus = Status.Late;
+                //}
                 bookViewModel.Copies.ToList().Add(item);
             }
 
@@ -62,14 +70,30 @@ namespace Book_Library.Models
             return await _context.Books.FirstOrDefaultAsync(b => b.BookID.Equals(bookID));
         }
 
-        public Task<Book> Update(Book updatedBook)
+        public async Task<Book> Update(Book updatedBook, int id)
         {
-            throw new NotImplementedException();
+            if (id != 0)
+            {
+                var updated = await ReadSingle(id);
+
+                updated.Title = updatedBook.Title;
+                updated.Reservation = updatedBook.Reservation;
+                updated.Copies = updatedBook.Copies;
+
+                await _context.SaveChangesAsync();
+                return updated;
+            }
+
+            await _context.SaveChangesAsync();
+            return null;
         }
 
-        public Task<Book> Delete(Book deletedBook)
+        public async Task<Book> Delete(Book deletedBook)
         {
-            throw new NotImplementedException();
+            Book deleted = await _context.Books.FirstOrDefaultAsync(b => b.BookID == deletedBook.BookID);
+            _context.Books.Remove(deleted);
+            await _context.SaveChangesAsync();
+            return deleted;
         }
     }
 }

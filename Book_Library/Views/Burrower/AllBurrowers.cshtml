@@ -3,30 +3,17 @@
 <h2>Alla lånetagare</h2>
 @foreach (var item in Model.Burrowers)
 {
-    <div class="">
-        <h5>@item.FirstName @item.LastName</h5>
-    </div>
     <div class="user-info">
-        @*<div class="">
-            <span class="variable">E-Post: </span>
-            <span>@item.EMail</span>
-        </div>*@
-        <div class="">
+        <div class="user-name">
+            <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>
+                <h5>@item.FirstName @item.LastName</h5>
+            </a>
+        </div>
+        <div class="user-number">
             <span>Personnummer: </span>
             <span>@item.SecurityNumber</span>
         </div>
-        @*<div class="">
-            <span>Adress: </span>
-            <span>@item.Address</span>
-        </div>*@
-    </div>
-    <div class="read-single">
-        <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>Detaljer</a>
-    </div>
-    <div class="delete">
-        <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>Radera</a>
-    </div>
-    <div class="update">
-        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>Ändra</a>
+        <a class="fas fa-trash" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>Radera</a>
+        <a class="fas fa-pencil" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>Ändra</a>
     </div>
 }

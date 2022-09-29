@@ -1,4 +1,5 @@
-﻿using Book_Library.ViewModels;
+﻿using Book_Library.Service;
+using Book_Library.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,17 @@ namespace Book_Library.Models
     public class BookController : Controller
     {
         readonly IBook _book;
+        readonly ILibrary<Book> _library;
 
-        public BookController(IBook book)
+        public BookController(ILibrary<Book> library, IBook book)
         {
             _book = book;
+            _library = library;
         }
 
         public async Task<ActionResult<Book>> AllBooks()
         {
-            IEnumerable<Book> booksInLibrary = await _book.ReadAll();
+            IEnumerable<Book> booksInLibrary = await _library.ReadAll();
 
             LibraryViewModel library = new LibraryViewModel();
             library.BookViewModels = new List<BookViewModel>();

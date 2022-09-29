@@ -8,5 +8,6 @@ namespace Book_Library.ViewModels
         public Book BurrowedBook { get; set; }
         public Loan Loan { get; set; }
         public IEnumerable<Burrower> AllBurrowers { get; set; }
+        public IEnumerable<Copy> AllCopies { get; set; }
     }
 }

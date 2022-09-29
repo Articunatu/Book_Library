@@ -1,4 +1,5 @@
 ﻿using Book_Library.Models;
+using Book_Library.Service;
 using Book_Library.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,12 +11,12 @@ namespace Book_Library.Controllers
 {
     public class LoanController : Controller
     {
-        readonly ILoan _loan;
-        readonly IBurrower _burrower;
+        readonly ILibrary<Loan> _libarary;
+        readonly ILibrary<Burrower> _burrower;
 
-        public LoanController(ILoan loan, IBurrower burrower)
+        public LoanController(ILibrary<Loan> library, ILibrary<Burrower> burrower)
         {
-            _loan = loan;
+            _libarary = library;
             _burrower = burrower;
         }
         
@@ -23,13 +24,14 @@ namespace Book_Library.Controllers
         {
             LoanViewModel loanViewModel = new LoanViewModel();
             loanViewModel.AllBurrowers =  await _burrower.ReadAll();
+            //loanViewModel.AllCopies = 
             return View(loanViewModel);
         }
 
         [HttpPost]
         public async Task<ActionResult<Loan>> CreateLoan(Loan createdLoan)
         {
-            await _loan.Create(createdLoan);
+            await _libarary.Create(createdLoan);
             return View();
         }
 

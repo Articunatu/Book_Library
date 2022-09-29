@@ -1,4 +1,5 @@
 using Book_Library.Models;
+using Book_Library.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,8 +31,10 @@ namespace Book_Library
             services.AddDbContext<LibraryDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IBurrower, BurrowerRepository>();
+            services.AddScoped<ILibrary<Burrower>, BurrowerRepository>();
+            services.AddScoped<ILibrary<Book>, BookRepository>();
             services.AddScoped<IBook, BookRepository>();
-            services.AddScoped<ILoan, LoanRepository>();
+            services.AddScoped<ILibrary<Loan>, LoanRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,16 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Book_Library.ViewModels;
+using Book_Library.Service;
 
 namespace Book_Library.Controllers
 {
     public class BurrowerController : Controller
     {
-        private IBurrower _burrower;
+        private readonly IBurrower _burrower;
+        readonly ILibrary<Burrower> _library;
 
-        public BurrowerController(IBurrower burrower)
+        public BurrowerController(IBurrower burrower, ILibrary<Burrower> library)
         {
             _burrower = burrower;
+            _library = library;
         }
 
         public ActionResult<Burrower> CreateBurrower()
@@ -27,20 +30,20 @@ namespace Book_Library.Controllers
         [HttpPost]
         public async Task<ActionResult<Burrower>> CreateBurrower(Burrower burrower)
         {
-            await _burrower.Create(burrower);
+            await _library.Create(burrower);
             return View();
         }
 
         public async Task<ActionResult<Burrower>> AllBurrowers()
         {
             BurrowerViewModel burrowerViewModel = new BurrowerViewModel();
-            burrowerViewModel.Burrowers = await _burrower.ReadAll();
+            burrowerViewModel.Burrowers = await _library.ReadAll();
             return View(burrowerViewModel);
         }
 
         public async Task<ActionResult<Burrower>> ChosenBurrower(int id)
         {
-            var burrower = await _burrower.ReadSingle(id);
+            var burrower = await _library.ReadSingle(id);
             return View(burrower);
         }
 
@@ -57,7 +60,7 @@ namespace Book_Library.Controllers
 
         public async Task<ActionResult<Burrower>> EditBurrower(int id)
         {
-            Burrower edited = await _burrower.ReadSingle(id);
+            Burrower edited = await _library.ReadSingle(id);
             if (edited != null)
             {
                 return View(edited);
@@ -76,7 +79,7 @@ namespace Book_Library.Controllers
                 return NotFound("Ingen objekt skickades...");
             }
 
-            Burrower editedBurrower = await _burrower.Update(burrower, id);
+            Burrower editedBurrower = await _library.Update(burrower, id);
 
             if (editedBurrower != null)
             {
@@ -88,11 +91,11 @@ namespace Book_Library.Controllers
 
         public async Task<ActionResult<Burrower>> DeleteBurrower(int id)
         {
-            var deletedBurrower = await _burrower.ReadSingle(id);
+            var deletedBurrower = await _library.ReadSingle(id);
 
             if (deletedBurrower != null)
             {
-                await _burrower.Delete(deletedBurrower);
+                await _library.Delete(deletedBurrower);
                 return View(deletedBurrower);
             }
             return NotFound("Kunde ej hitta angiven lånetagare...");

@@ -5,33 +5,36 @@
         <h5>@Model.Book.Title</h5>
     </div>
     <div>
-        @foreach (var item in Model.Authors)
+        @foreach (var author in Model.Authors)
         {
-            <p>@item.FirstName @item.LastName</p>
+        <p>@author.LastName, @author.FirstName</p>
         }
     </div>
     <div>
         <p>Alla exemplar:</p>
     </div>
     <div>
-        @foreach (var item in Model.Book.Copies)
+        @foreach (var copy in Model.Book.Copies)
         {
-            @switch (item.BookStatus)
+            @*<span>
+                @Model.Shelves.FirstOrDefault(s => s.ShelfID == copy.ShelfID).ShelfName
+            </span>*@
+            switch (copy.BookStatus)
             {
                 case Status.Available:
-                    <p>TILLGÄNGLIG</p>
+                    <span>TILLGÄNGLIG</span>
                     break;
                 case Status.Late:
-                    <p>FÖRSENAD</p>
+                    <span>FÖRSENAD</span>
                     break;
                 case Status.Gone:
-                    <p>BORTA</p>
+                    <span>BORTA</span>
                     break;
                 case Status.Burrowed:
-                    <p>UTLÅNAD</p>
+                    <span>UTLÅNAD</span>
                     break;
                 case Status.Reserved:
-                    <p>RESERVERAD</p>
+                    <span>RESERVERAD</span>
                     break;
                 default:
                     break;

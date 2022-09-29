@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class Library
+    public class Location
     {
-        public int LibraryID { get; set; }
-        public string LibraryName { get; set; }
+        public int LocationID { get; set; }
+        public string LocationName { get; set; }
         public ICollection<Shelf> Shelves { get; set; }
     }
 }
