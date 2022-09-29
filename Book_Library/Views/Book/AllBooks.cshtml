@@ -4,7 +4,7 @@
 
 @foreach (var bookVM in Model.BookViewModels)
 {
-    <div>
+    <div class="table-bordered">
         <div class="book-title">
             <a asp-area="" asp-controller="Book" asp-action="SingleBook" asp-route-id=@bookVM.Book.BookID>
                 @bookVM.Book.Title

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Book_Library.Migrations
 {
-    [DbContext(typeof(LibraryDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220916111834_date-format")]
     partial class dateformat
     {

@@ -1,19 +1,42 @@
 ﻿@model BurrowerViewModel
 
-<h2>Alla lånetagare</h2>
-@foreach (var item in Model.Burrowers)
-{
-    <div class="user-info">
+<div class="container">
+
+    <h2 class="card-header">Alla lånetagare</h2>
+    <div class="card-columns">
         <div class="user-name">
-            <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>
-                <h5>@item.FirstName @item.LastName</h5>
-            </a>
+            <h5>Namn</h5>
         </div>
+
         <div class="user-number">
-            <span>Personnummer: </span>
-            <span>@item.SecurityNumber</span>
+            <h5>Personnummer</h5>
         </div>
-        <a class="fas fa-trash" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>Radera</a>
-        <a class="fas fa-pencil" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>Ändra</a>
+
+        <div class="change-user">
+            <h5>Ändra lånetagare</h5>
+        </div>
     </div>
-}
+    @foreach (var item in Model.Burrowers)
+    {
+        <div class="fa-border">
+            <div class="card-columns">
+                <div class="user-name">
+                    <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>
+                        <b>@item.FirstName @item.LastName</b>
+                    </a>
+                </div>
+                <div class="user-number">
+                    <span>@item.SecurityNumber</span>
+                </div>
+
+                <a type="button" class="btn btn-primary" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>
+                    <i class="fa-solid fa-trash"></i>
+                </a>
+                <a type="button" class="btn btn-primary" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>
+                    <i class="fa fa-pencil-square"></i>
+                </a>
+            </div>
+        </div>
+
+    }
+</div>

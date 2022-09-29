@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class BurrowerRepository : ILibrary<Burrower>, IBurrower
+    public class BurrowerRepository : IDbContext<Burrower>, IBurrower
     {
-        private LibraryDbContext _context;
+        private AppDbContext _context;
 
-        public BurrowerRepository(LibraryDbContext context)
+        public BurrowerRepository(AppDbContext context)
         {
             _context = context;
         }

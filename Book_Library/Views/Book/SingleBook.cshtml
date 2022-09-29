@@ -1,44 +1,51 @@
 ﻿@model BookViewModel
 
-<div class="container">
+<div class="col-md-11">
     <div>
         <h5>@Model.Book.Title</h5>
     </div>
-    <div>
+    <div class="author">
         @foreach (var author in Model.Authors)
         {
-        <p>@author.LastName, @author.FirstName</p>
+            <p>@author.LastName, @author.FirstName</p>
         }
     </div>
     <div>
+
         <p>Alla exemplar:</p>
     </div>
-    <div>
+    <div class="book-copies">
+        <div class="card-columns">
+            <h5 class="placing">Placering</h5>
+            <h5 class="status">Status</h5>
+        </div>
+
+
         @foreach (var copy in Model.Book.Copies)
         {
-            @*<span>
-                @Model.Shelves.FirstOrDefault(s => s.ShelfID == copy.ShelfID).ShelfName
-            </span>*@
-            switch (copy.BookStatus)
-            {
-                case Status.Available:
-                    <span>TILLGÄNGLIG</span>
-                    break;
-                case Status.Late:
-                    <span>FÖRSENAD</span>
-                    break;
-                case Status.Gone:
-                    <span>BORTA</span>
-                    break;
-                case Status.Burrowed:
-                    <span>UTLÅNAD</span>
-                    break;
-                case Status.Reserved:
-                    <span>RESERVERAD</span>
-                    break;
-                default:
-                    break;
-            }
+            <div class="card-columns">
+                <p class="placing">Hylla @copy.ShelfID</p>
+
+                @switch (copy.BookStatus)
+                {
+                    case Status.Available:
+                        <p class="status">TILLGÄNGLIG</p>
+                        break;
+                    case Status.Late:
+                        <p class="status">FÖRSENAD</p>
+                        break;
+                    case Status.Gone:
+                        <p class="status">BORTA</p>
+                        break;
+                    case Status.Burrowed:
+                        <p class="status">UTLÅNAD</p>
+                        break;
+                    case Status.Reserved:
+                        <p class="status">RESERVERAD</p>
+                        break;
+                }
+            </div>
         }
+
     </div>
 </div>

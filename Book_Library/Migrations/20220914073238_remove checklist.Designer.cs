@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Book_Library.Migrations
 {
-    [DbContext(typeof(LibraryDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220914073238_remove checklist")]
     partial class removechecklist
     {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Book_Library.Migrations
 {
-    [DbContext(typeof(LibraryDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220921085044_Book interface")]
     partial class Bookinterface
     {

@@ -1,32 +1,40 @@
 ﻿@model Burrower
 
-<div class="selected-burrower">
-    <div class="">
-        <h5>@Model.FirstName @Model.LastName</h5>
+<div class="col-11">
+    <div class="selected-burrower">
+        <h3 class="fa-underline">Vald lånetagare</h3>
+        <table>
+            <tr class="">
+                <th class="">Namn </th>
+                <td class="">@Model.FirstName @Model.LastName</td>
+            </tr>
+            <tr class="">
+                <th class="">E-Post: </th>
+                <td>@Model.EMail</td>
+            </tr>
+            <tr class="">
+                <th>Personnummer: </th>
+                <td>@Model.SecurityNumber</td>
+            </tr>
+            <tr class="">
+                <th>Adress: </th>
+                <td>@Model.Address</td>
+            </tr>
+        </table>
     </div>
-    <div class="user-info">
-        <div class="">
-            <span class="variable">E-Post: </span>
-            <span>@Model.EMail</span>
-        </div>
-        <div class="">
-            <span>Personnummer: </span>
-            <span>@Model.SecurityNumber</span>
-        </div>
-        <div class="">
-            <span>Adress: </span>
-            <span>@Model.Address</span>
-        </div>
-    </div>
-    <div class="burrowers-loan">
+    <div class="btn-outline-light">
         <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
-            Lån
+            Se alla lån
         </a>
     </div>
     <div class="delete">
-        <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>Radera</a>
+        <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>
+            <i class="fa-solid fa-trash"></i>
+        </a>
     </div>
     <div class="update">
-        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>Ändra</a>
+        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>
+            <i class="fa fa-pencil-square"></i>
+        </a>
     </div>
 </div>

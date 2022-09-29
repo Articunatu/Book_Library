@@ -11,12 +11,12 @@ namespace Book_Library.Controllers
 {
     public class LoanController : Controller
     {
-        readonly ILibrary<Loan> _libarary;
-        readonly ILibrary<Burrower> _burrower;
+        readonly IDbContext<Loan> _context;
+        readonly IDbContext<Burrower> _burrower;
 
-        public LoanController(ILibrary<Loan> library, ILibrary<Burrower> burrower)
+        public LoanController(IDbContext<Loan> context, IDbContext<Burrower> burrower)
         {
-            _libarary = library;
+            _context = context;
             _burrower = burrower;
         }
         
@@ -31,7 +31,7 @@ namespace Book_Library.Controllers
         [HttpPost]
         public async Task<ActionResult<Loan>> CreateLoan(Loan createdLoan)
         {
-            await _libarary.Create(createdLoan);
+            await _context.Create(createdLoan);
             return View();
         }
 

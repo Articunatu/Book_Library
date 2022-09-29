@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class BookRepository : ILibrary<Book>, IBook
+    public class BookRepository : IDbContext<Book>, IBook
     {
-        readonly LibraryDbContext _context;
+        readonly AppDbContext _context;
 
-        public BookRepository(LibraryDbContext context)
+        public BookRepository(AppDbContext context)
         {
             _context = context;
         }

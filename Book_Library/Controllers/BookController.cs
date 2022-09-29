@@ -11,17 +11,17 @@ namespace Book_Library.Models
     public class BookController : Controller
     {
         readonly IBook _book;
-        readonly ILibrary<Book> _library;
+        readonly IDbContext<Book> _context;
 
-        public BookController(ILibrary<Book> library, IBook book)
+        public BookController(IDbContext<Book> context, IBook book)
         {
             _book = book;
-            _library = library;
+            _context = context;
         }
 
         public async Task<ActionResult<Book>> AllBooks()
         {
-            IEnumerable<Book> booksInLibrary = await _library.ReadAll();
+            IEnumerable<Book> booksInLibrary = await _context.ReadAll();
 
             LibraryViewModel library = new LibraryViewModel();
             library.BookViewModels = new List<BookViewModel>();

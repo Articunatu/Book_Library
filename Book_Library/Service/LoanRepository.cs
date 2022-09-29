@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class LoanRepository : ILibrary<Loan>
+    public class LoanRepository : IDbContext<Loan>
     {
-        readonly LibraryDbContext _context;
+        readonly AppDbContext _context;
 
-        public LoanRepository(LibraryDbContext context)
+        public LoanRepository(AppDbContext context)
         {
             _context = context;
         }

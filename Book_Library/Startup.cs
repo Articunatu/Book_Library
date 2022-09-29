@@ -28,13 +28,13 @@ namespace Book_Library
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<LibraryDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IBurrower, BurrowerRepository>();
-            services.AddScoped<ILibrary<Burrower>, BurrowerRepository>();
-            services.AddScoped<ILibrary<Book>, BookRepository>();
+            services.AddScoped<IDbContext<Burrower>, BurrowerRepository>();
+            services.AddScoped<IDbContext<Book>, BookRepository>();
             services.AddScoped<IBook, BookRepository>();
-            services.AddScoped<ILibrary<Loan>, LoanRepository>();
+            services.AddScoped<IDbContext<Loan>, LoanRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

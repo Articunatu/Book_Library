@@ -14,8 +14,8 @@ namespace Book_Library.Models
         [StringLength(25, ErrorMessage = "En boktitel kan max bestå utav 25 bokstäver!")]
         [MinLength(1, ErrorMessage = "En boktitel måste bestå av minst 1 bokstav!")]
         public string Title { get; set; }
-        //public string ImageURL { get; set; }
-        //public string ThumbnailURL { get; set; }
+        public string ImageURL { get; set; }
+        public string ThumbnailURL { get; set; }
         public ICollection<Copy> Copies { get; set; }
         public Queue<Reservation> Reservation { get; set; }
     }
