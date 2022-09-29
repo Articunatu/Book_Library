@@ -1,8 +1,9 @@
 ﻿@model BookViewModel
 
 <div class="col-md-11">
+    <img src="@Model.Book.ThumbnailURL" alt="<BILD SAKNAS>" />
     <div>
-        <h5>@Model.Book.Title</h5>
+        <h5 class="fa fa-bold">@Model.Book.Title</h5>
     </div>
     <div class="author">
         @foreach (var author in Model.Authors)

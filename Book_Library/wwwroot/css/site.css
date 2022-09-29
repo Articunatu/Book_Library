@@ -93,5 +93,11 @@ h3 {
 }
 
 .author {
-    color:dodgerblue;
+    color:darkgreen;
+}
+
+img {
+    width: 100px; 
+    height: 150px;
+    object-fit: cover;
 }
