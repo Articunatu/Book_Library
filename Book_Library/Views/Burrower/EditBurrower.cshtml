@@ -5,7 +5,7 @@
 <div>
     <form asp-action="SavedEdit" asp-controller="Burrower" asp-route-id="@Model.BurrowerID" method="post">
 
-        <table cellpadding="0" cellspacing="0">
+        <table class="table-bordered" cellpadding="2" cellspacing="0">
             <tr>
                 <th colspan="2" align="center">Lånetagare</th>
             </tr>
@@ -31,8 +31,14 @@
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Submit" /></td>
+                <td><input type="submit" value="SPARA" /></td>
             </tr>
         </table>
+
+        <div class="btn-outline-light">
+            <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
+                <i class="btn btn-info">SE ALLA LÅNETAGRENS LÅN</i> 
+            </a>
+        </div>
     </form>
 </div>

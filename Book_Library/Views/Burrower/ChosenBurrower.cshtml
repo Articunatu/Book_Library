@@ -1,40 +1,52 @@
 ﻿@model Burrower
 
-<div class="col-11">
-    <div class="selected-burrower">
-        <h3 class="fa-underline">Vald lånetagare</h3>
-        <table>
-            <tr class="">
-                <th class="">Namn </th>
-                <td class="">@Model.FirstName @Model.LastName</td>
-            </tr>
-            <tr class="">
-                <th class="">E-Post: </th>
-                <td>@Model.EMail</td>
-            </tr>
-            <tr class="">
-                <th>Personnummer: </th>
-                <td>@Model.SecurityNumber</td>
-            </tr>
-            <tr class="">
-                <th>Adress: </th>
-                <td>@Model.Address</td>
-            </tr>
-        </table>
+
+<div class="container">
+
+    <table class="table-bordered" cellpadding="2" cellspacing="0">
+        <tr>
+            <th colspan="2" align="center">Lånetagare</th>
+        </tr>
+        <tr>
+            <td>Förnamn:</td>
+            <td>@Html.TextBoxFor(b => b.FirstName)</td>
+        </tr>
+        <tr>
+            <td>Efternamn:</td>
+            <td>@Html.TextBoxFor(b => b.LastName)</td>
+        </tr>
+        <tr>
+            <td>Adress:</td>
+            <td>@Html.TextBoxFor(b => b.Address)</td>
+        </tr>
+        <tr>
+            <td>Personnummer:</td>
+            <td>@Html.TextBoxFor(b => b.SecurityNumber)</td>
+        </tr>
+        <tr>
+            <td>E-Post:</td>
+            <td>@Html.TextBoxFor(b => b.EMail)</td>
+        </tr>
+    </table>
+
+    
+
+    <div class="card-columns">
+
+        <div class="btn-outline-light">
+            <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
+                <i class="btn btn-info">SE ALLA LÅN</i>
+            </a>
+        </div>
+
+        <div class="btn-outline-light">
+            <a type="button" class="btn btn-secondary" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>
+                <i class="fa-solid fa-trash"></i>
+            </a>
+            <a type="button" class="btn btn-primary" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>
+                <i class="fa fa-pencil-square"></i>
+            </a>
+        </div>
     </div>
-    <div class="btn-outline-light">
-        <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
-            Se alla lån
-        </a>
-    </div>
-    <div class="delete">
-        <a asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>
-            <i class="fa-solid fa-trash"></i>
-        </a>
-    </div>
-    <div class="update">
-        <a asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>
-            <i class="fa fa-pencil-square"></i>
-        </a>
-    </div>
+
 </div>
