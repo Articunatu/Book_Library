@@ -1,52 +1,60 @@
 ﻿@model BookViewModel
 
-<div class="col-md-11">
-    <img src="@Model.Book.ThumbnailURL" alt="<BILD SAKNAS>" />
-    <div>
-        <h5 class="fa fa-bold">@Model.Book.Title</h5>
-    </div>
-    <div class="author">
-        @foreach (var author in Model.Authors)
-        {
-            <p>@author.LastName, @author.FirstName</p>
-        }
-    </div>
-    <div>
-
-        <p>Alla exemplar:</p>
-    </div>
-    <div class="book-copies">
+<div class="row gy-5">
+    <div class="book-top">
         <div class="card-columns">
-            <h5 class="placing">Placering</h5>
-            <h5 class="status">Status</h5>
-        </div>
+            <div>
+                <img src="@Model.Book.ThumbnailURL" alt="<BILD SAKNAS>" />
+            </div>
 
+            <div class="title-author">
+                <p class="book-title">@Model.Book.Title</p>
 
-        @foreach (var copy in Model.Book.Copies)
-        {
-            <div class="card-columns">
-                <p class="placing">Hylla @copy.ShelfID</p>
-
-                @switch (copy.BookStatus)
+                @foreach (var author in Model.Authors)
                 {
-                    case Status.Available:
-                        <p class="status">TILLGÄNGLIG</p>
-                        break;
-                    case Status.Late:
-                        <p class="status">FÖRSENAD</p>
-                        break;
-                    case Status.Gone:
-                        <p class="status">BORTA</p>
-                        break;
-                    case Status.Burrowed:
-                        <p class="status">UTLÅNAD</p>
-                        break;
-                    case Status.Reserved:
-                        <p class="status">RESERVERAD</p>
-                        break;
+                    <p>
+                        <i class="author">@author.LastName, @author.FirstName</i>
+                    </p>
                 }
             </div>
-        }
-
+        </div>
     </div>
+
+
+    <table class="table">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">#        ALLA EXEMPLAR</th>
+                <th scope="col">Placering</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 1; i <= Model.Book.Copies.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>Hylla @Model.Book.Copies.ToArray()[i - 1].ShelfID</td>
+                    @switch (Model.Book.Copies.ToArray()[i - 1].BookStatus)
+                    {
+                        case Status.Available:
+                            <td class="status">TILLGÄNGLIG</td>
+                            break;
+                        case Status.Late:
+                            <td class="status">FÖRSENAD</td>
+                            break;
+                        case Status.Gone:
+                            <td class="status">BORTA</td>
+                            break;
+                        case Status.Burrowed:
+                            <td class="status">UTLÅNAD</td>
+                            break;
+                        case Status.Reserved:
+                            <td class="status">RESERVERAD</td>
+                            break;
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

@@ -4,22 +4,29 @@
 
 @foreach (var bookVM in Model.BookViewModels)
 {
-<div class="table-bordered">
-    <img src="@bookVM.Book.ThumbnailURL" alt="<BILD SAKNAS>" />
-    <div class="fa fa-bold">
-        <a asp-area="" asp-controller="Book" asp-action="SingleBook" asp-route-id=@bookVM.Book.BookID>
-            @bookVM.Book.Title
-        </a>
+    <div class="table-bordered">
+        <div class="card-columns">
+            <img src="@bookVM.Book.ThumbnailURL" alt="<BILD SAKNAS>" />
+            <div class="book-title">
+                <a asp-area="" asp-controller="Book" asp-action="SingleBook" asp-route-id=@bookVM.Book.BookID>
+                    @bookVM.Book.Title
+                </a>
+            </div>
+            <div class="author">
+                @if (bookVM.Authors.Count == 0)
+                {
+                    <p>FÖRFATTARE SAKNAS</p>
+                }
+                @foreach (var author in bookVM.Authors)
+                {
+                    <p>
+                        <i>@author.LastName, @author.FirstName </i>
+
+                    </p>
+                }
+
+            </div>
+        </div>
+
     </div>
-    <div class="author">
-        @if (bookVM.Authors.Count == 0)
-        {
-            <p>FÖRFATTARE SAKNAS</p>
-        }
-        @foreach (var author in bookVM.Authors)
-        {
-            <p>@author.LastName, @author.FirstName </p>
-        }
-    </div>
-</div>
 }

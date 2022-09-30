@@ -73,6 +73,8 @@ body {
 
 .book-title {
     text-align: left;
+    font-weight: bold;
+    font-size: large;
 }
 
 .loan {
@@ -101,3 +103,14 @@ img {
     height: 150px;
     object-fit: cover;
 }
+/*
+title-author{
+    position: sticky;
+    height: 100px;
+}
+*/
+
+/*.book-top{
+    height: 140px;
+    width: 120px;
+}*/
