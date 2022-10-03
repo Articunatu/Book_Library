@@ -96,6 +96,7 @@ h3 {
 
 .author {
     color:darkgreen;
+
 }
 
 img {
@@ -118,3 +119,11 @@ title-author{
     height: 140px;
     width: 120px;
 }*/
+
+.copy-container{
+    transform: translateY(-10px);
+}
+
+.single-author {
+    transform: translateY(10px);
+}

@@ -20,41 +20,44 @@
         </div>
     </div>
 
-
-    <table class="table">
-        <thead class="table-dark">
-            <tr>
-                <th class="col-sm-1" scope="col">#        ALLA EXEMPLAR</th>
-                <th class="col-sm-2" scope="col">Placering</th>
-                <th class="col-sm-3" scope="col">Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (int i = 1; i <= Model.Book.Copies.Count; i++)
-            {
+    <div class="copy-container">
+        <table class="table">
+            <thead class="table-dark">
                 <tr>
-                    <th scope="row">@i</th>
-                    <td>Hylla @Model.Book.Copies.ToArray()[i - 1].ShelfID</td>
-                    @switch (Model.Book.Copies.ToArray()[i - 1].BookStatus)
-                    {
-                        case Status.Available:
-                            <td class="status">TILLGÄNGLIG</td>
-                            break;
-                        case Status.Late:
-                            <td class="status">FÖRSENAD</td>
-                            break;
-                        case Status.Gone:
-                            <td class="status">BORTA</td>
-                            break;
-                        case Status.Burrowed:
-                            <td class="status">UTLÅNAD</td>
-                            break;
-                        case Status.Reserved:
-                            <td class="status">RESERVERAD</td>
-                            break;
-                    }
+                    <th class="col-sm-1" scope="col">#        ALLA EXEMPLAR</th>
+                    <th class="col-sm-2" scope="col">Placering</th>
+                    <th class="col-sm-3" scope="col">Status</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @for (int i = 1; i <= Model.Book.Copies.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@i</th>
+                        <td>Hylla @Model.Book.Copies.ToArray()[i - 1].ShelfID</td>
+                        @switch (Model.Book.Copies.ToArray()[i - 1].BookStatus)
+                        {
+                            case Status.Available:
+                                <td class="status">TILLGÄNGLIG</td>
+                                break;
+                            case Status.Late:
+                                <td class="status">FÖRSENAD</td>
+                                break;
+                            case Status.Gone:
+                                <td class="status">BORTA</td>
+                                break;
+                            case Status.Burrowed:
+                                <td class="status">UTLÅNAD</td>
+                                break;
+                            case Status.Reserved:
+                                <td class="status">RESERVERAD</td>
+                                break;
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    
 </div>
