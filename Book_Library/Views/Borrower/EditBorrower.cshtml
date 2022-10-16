@@ -1,9 +1,9 @@
-﻿@model Burrower
+﻿@model Borrower
 
 <h4>Ändra på en existerande lånetagare</h4>
 
 <div>
-    <form asp-action="SavedEdit" asp-controller="Burrower" asp-route-id="@Model.BurrowerID" method="post">
+    <form asp-action="SavedEdit" asp-controller="Borrower" asp-route-id="@Model.BorrowerID" method="post">
 
         <table class="table-bordered" cellpadding="2" cellspacing="0">
             <tr>
@@ -36,7 +36,7 @@
         </table>
 
         <div class="btn-outline-light">
-            <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
+            <a asp-area="" asp-controller="Borrower" asp-action="Loans" asp-route-id=@Model.BorrowerID>
                 <i class="btn btn-info">SE ALLA LÅNETAGRENS LÅN</i> 
             </a>
         </div>

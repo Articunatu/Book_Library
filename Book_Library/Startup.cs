@@ -30,8 +30,8 @@ namespace Book_Library
 
             services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IBurrower, BurrowerRepository>();
-            services.AddScoped<IDbContext<Burrower>, BurrowerRepository>();
+            services.AddScoped<IBorrower, BorrowerRepository>();
+            services.AddScoped<IDbContext<Borrower>, BorrowerRepository>();
             services.AddScoped<IDbContext<Book>, BookRepository>();
             services.AddScoped<IBook, BookRepository>();
             services.AddScoped<IDbContext<Loan>, LoanRepository>();

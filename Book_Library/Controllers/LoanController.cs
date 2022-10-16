@@ -12,9 +12,9 @@ namespace Book_Library.Controllers
     public class LoanController : Controller
     {
         readonly IDbContext<Loan> _context;
-        readonly IDbContext<Burrower> _burrower;
+        readonly IDbContext<Borrower> _burrower;
 
-        public LoanController(IDbContext<Loan> context, IDbContext<Burrower> burrower)
+        public LoanController(IDbContext<Loan> context, IDbContext<Borrower> burrower)
         {
             _context = context;
             _burrower = burrower;
@@ -23,7 +23,7 @@ namespace Book_Library.Controllers
         public async Task<ActionResult<Loan>> CreateLoan()
         {
             LoanViewModel loanViewModel = new LoanViewModel();
-            loanViewModel.AllBurrowers =  await _burrower.ReadAll();
+            loanViewModel.AllBorrowers =  await _burrower.ReadAll();
             //loanViewModel.AllCopies = 
             return View(loanViewModel);
         }

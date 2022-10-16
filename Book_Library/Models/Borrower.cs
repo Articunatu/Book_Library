@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Book_Library.Models
 {
-    public class Burrower
+    public class Borrower
     {
         [Key]
-        public int BurrowerID { get; set; }
+        public int BorrowerID { get; set; }
         [Required(ErrorMessage = "En lånetagare måste ha ett förnamn!")]
         [StringLength(15, ErrorMessage = "Ett förnamn kan bestå utav max 15 bokstäver!")]
         [MinLength(1, ErrorMessage = "Ett förnamn måste bestå utav minst 1 bokstav!")]
@@ -22,7 +22,7 @@ namespace Book_Library.Models
         public string Address { get; set; }
         [Required(ErrorMessage = "En lånetagare måste ha ett personnummer!")]
         public string SecurityNumber { get; set; }
-        public ICollection<Loan> BurrowedBooks { get; set; }
+        public ICollection<Loan> BorrowedBooks { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
     }
 }

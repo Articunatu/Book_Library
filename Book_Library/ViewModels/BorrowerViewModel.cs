@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Book_Library.ViewModels
 {
-    public class BurrowerViewModel
+    public class BorrowerViewModel
     {
-        public IEnumerable<Burrower> Burrowers { get; set; }
+        public IEnumerable<Borrower> Borrowers { get; set; }
     }
 }

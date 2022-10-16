@@ -21,7 +21,7 @@ namespace Book_Library.Service
         BookViewModel BooksAuthors(int id);
     }
 
-    public interface IBurrower
+    public interface IBorrower
     {
         LoanCard ReadAllBurrowersLoans(int id);
     }

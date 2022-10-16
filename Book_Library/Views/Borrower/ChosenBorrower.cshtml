@@ -1,4 +1,4 @@
-﻿@model Burrower
+﻿@model Borrower
 
 
 <div class="container">
@@ -34,16 +34,16 @@
     <div class="card-columns">
 
         <div class="btn-outline-light">
-            <a asp-area="" asp-controller="Burrower" asp-action="Loans" asp-route-id=@Model.BurrowerID>
+            <a asp-area="" asp-controller="Borrower" asp-action="Loans" asp-route-id=@Model.BorrowerID>
                 <i class="btn btn-info">SE ALLA LÅN</i>
             </a>
         </div>
 
         <div class="btn-outline-light">
-            <a type="button" class="btn btn-secondary" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@Model.BurrowerID>
+            <a type="button" class="btn btn-secondary" asp-area="" asp-controller="Borrower" asp-action="DeleteBorrower" asp-route-id=@Model.BorrowerID>
                 <i class="fa-solid fa-trash"></i>
             </a>
-            <a type="button" class="btn btn-primary" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@Model.BurrowerID>
+            <a type="button" class="btn btn-primary" asp-area="" asp-controller="Borrower" asp-action="EditBorrower" asp-route-id=@Model.BorrowerID>
                 <i class="fa fa-pencil-square"></i>
             </a>
         </div>

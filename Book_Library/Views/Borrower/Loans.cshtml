@@ -9,7 +9,7 @@
                 @foreach (LoanViewModel loanVM in Model.LoanCards)
                 {
                     <div class="book-title">
-                        <h5>@loanVM.BurrowedBook.Title</h5>
+                        <h5>@loanVM.BorrowedBook.Title</h5>
                     </div>
 
                     <div class="return-date">
@@ -25,7 +25,7 @@
                     </div>
                     @if (DateTime.Compare(loanVM.Loan.DateOfReturn, DateTime.Now) < 0)
                     {
-                        loanVM.BurrowedBook.Copies.FirstOrDefault(c => c.BookID == loanVM.BurrowedBook.BookID).BookStatus = Status.Late;
+                        loanVM.BorrowedBook.Copies.FirstOrDefault(c => c.BookID == loanVM.BorrowedBook.BookID).BookStatus = Status.Late;
                         <p>FÖRSENAD</p>
                     }
                 }

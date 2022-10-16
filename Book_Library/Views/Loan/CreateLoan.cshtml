@@ -13,14 +13,14 @@
             <td class="side-header">Lånetagare: </td>
             @{
                 ViewBag.Title = "Lista";
-                List<SelectListItem> burrowers = new List<SelectListItem>();
-                foreach (var item in Model.AllBurrowers)
+                List<SelectListItem> borrowers = new List<SelectListItem>();
+                foreach (var item in Model.AllBorrowers)
                 {
-                    burrowers.Add(new SelectListItem() { Text = item.LastName + ", " + item.FirstName });
+                    borrowers.Add(new SelectListItem() { Text = item.LastName + ", " + item.FirstName });
                 }
-                burrowers.OrderBy(b => b.Text);
+                borrowers.OrderBy(b => b.Text);
             }
-            <td>@Html.DropDownList("Lånetagare", burrowers, "<Välj>")</td>
+            <td>@Html.DropDownList("Lånetagare", borrowers, "<Välj>")</td>
 
         </tr>
 

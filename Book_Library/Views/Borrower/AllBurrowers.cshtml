@@ -1,4 +1,4 @@
-﻿@model BurrowerViewModel
+﻿@model BorrowerViewModel
 
 <div class="container">
 
@@ -16,12 +16,12 @@
             <h5>Ändra lånetagare</h5>
         </div>
     </div>
-    @foreach (var item in Model.Burrowers)
+    @foreach (var item in Model.Borrowers)
     {
         <div class="fa-border">
             <div class="card-columns">
                 <div class="user-name">
-                    <a asp-area="" asp-controller="Burrower" asp-action="ChosenBurrower" asp-route-id=@item.BurrowerID>
+                    <a asp-area="" asp-controller="Borrower" asp-action="ChosenBorrower" asp-route-id=@item.BorrowerID>
                         <b>@item.FirstName @item.LastName</b>
                     </a>
                 </div>
@@ -29,10 +29,10 @@
                     <span>@item.SecurityNumber</span>
                 </div>
 
-                <a type="button" class="btn btn-secondary" asp-area="" asp-controller="Burrower" asp-action="DeleteBurrower" asp-route-id=@item.BurrowerID>
+                <a type="button" class="btn btn-secondary" asp-area="" asp-controller="Borrower" asp-action="DeleteBorrower" asp-route-id=@item.BorrowerID>
                     <i class="fa-solid fa-trash"></i>
                 </a>
-                <a type="button" class="btn btn-primary" asp-area="" asp-controller="Burrower" asp-action="EditBurrower" asp-route-id=@item.BurrowerID>
+                <a type="button" class="btn btn-primary" asp-area="" asp-controller="Borrower" asp-action="EditBorrower" asp-route-id=@item.BorrowerID>
                     <i class="fa fa-pencil-square"></i>
                 </a>
             </div>

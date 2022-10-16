@@ -5,9 +5,9 @@ namespace Book_Library.ViewModels
 {
     public class LoanViewModel
     {
-        public Book BurrowedBook { get; set; }
+        public Book BorrowedBook { get; set; }
         public Loan Loan { get; set; }
-        public IEnumerable<Burrower> AllBurrowers { get; set; }
+        public IEnumerable<Borrower> AllBorrowers { get; set; }
         public IEnumerable<Copy> AllCopies { get; set; }
     }
 }
